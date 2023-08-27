@@ -20,7 +20,7 @@ void dijkstra(int source)
         {
             int next = it->first;
             int nextDist = it->second;
-            if (distTo[next] > distTo[node] + nextDist)
+            if (distTo[node] + nextDist < distTo[next])
             {
                 distTo[next] = distTo[node] + nextDist;
                 pq.push(make_pair(distTo[next], next));
@@ -40,7 +40,7 @@ int main()
         cin >> u >> v >> w;
         g[u].push_back({v, w});
     }
-    dijkstra(1);
+    dijkstra(source);
     cout << "The distances from source " << source << " are : \n";
     for (int i = 1; i <= n; i++)
         cout << distTo[i] << " ";
