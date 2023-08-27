@@ -7,14 +7,16 @@ bool dfs(int vertex, int parent)
 {
     vis[vertex] = true;
     // cout << vertex << " ";
+    bool isLoopExists = false;
     for (int child : graph[vertex])
     {
         if (vis[child] and child == parent)
             continue;
         if (vis[child])
             return true;
-        dfs(child, vertex);
+        isLoopExists |= dfs(child, vertex);
     }
+    return isLoopExists;
 }
 int main()
 {

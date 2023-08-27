@@ -25,7 +25,7 @@ int main()
         cin >> u >> v;
         graph[u].push_back(v);
     }
-    for (int i = 0; i < n; i++)
+    for (int i = 1; i <= n; i++)
     {
         if (!vis[i])
         {

@@ -3,19 +3,27 @@ using namespace std;
 const int N = 1e5 + 10;
 vector<int> graph[N];
 bool vis[N];
-queue<int> q;
-void bfs(int vertex, int n)
+int level[N];
+void bfs(int source)
 {
-    vis[vertex] = true;
-    q.push(vertex);
-    for (int i = vertex; i <= n; i++)
+    queue<int> q;
+    q.push(source);
+    vis[source] = true;
+
+    while (!q.empty())
     {
-        cout << i << "-> ";
-        for (auto it : graph[i])
+        int curr_vertex = q.front();
+        q.pop();
+        cout << curr_vertex << " ";
+        for (int child : graph[curr_vertex])
         {
-            cout << it << " ";
+            if (!vis[child])
+            {
+                q.push(child);
+                vis[child] = true;
+                level[child] = level[curr_vertex] + 1;
+            }
         }
-        cout << endl;
     }
 }
 int main()
@@ -30,6 +38,11 @@ int main()
         graph[u].push_back(v);
         graph[v].push_back(u);
     }
-
+    bfs(1);
+    cout << endl;
+    for (int i = 1; i <= n; i++)
+    {
+        cout << i << ": " << level[i] << endl;
+    }
     return 0;
 }
