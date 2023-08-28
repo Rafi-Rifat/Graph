@@ -40,6 +40,7 @@ int main()
     }
     bfs(1);
     cout << endl;
+    cout << "The levels of each vertex are :" << endl;
     for (int i = 1; i <= n; i++)
     {
         cout << i << ": " << level[i] << endl;
