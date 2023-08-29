@@ -1,0 +1,1 @@
+{"name":"Local: articulation","url":"e:\\2nd year 2nd semester\\Graph\\articulation.cpp","tests":[{"id":1693316195560,"input":"5 5\n1 2\n1 3\n2 3\n3 4\n4 5","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"e:\\2nd year 2nd semester\\Graph\\articulation.cpp","group":"local","local":true}

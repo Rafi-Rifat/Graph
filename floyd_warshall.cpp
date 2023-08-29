@@ -1,73 +1,45 @@
 #include <bits/stdc++.h>
 using namespace std;
-
-class Solution
+int n, m;
+const int N = 2000;
+vector<vector<int>> graph(N, vector<int>(N, INT_MAX));
+void floyedWarshal(int x, int y)
 {
-public:
-    void shortest_distance(vector<vector<int>> &matrix)
+    for (int k = 0; k < n; k++)
     {
-        int n = matrix.size();
         for (int i = 0; i < n; i++)
         {
             for (int j = 0; j < n; j++)
             {
-                if (matrix[i][j] == -1)
-                {
-                    matrix[i][j] = 1e9;
-                }
-                if (i == j)
-                    matrix[i][j] = 0;
-            }
-        }
-
-        for (int k = 0; k < n; k++)
-        {
-            for (int i = 0; i < n; i++)
-            {
-                for (int j = 0; j < n; j++)
-                {
-                    matrix[i][j] = min(matrix[i][j],
-                                       matrix[i][k] + matrix[k][j]);
-                }
-            }
-        }
-
-        for (int i = 0; i < n; i++)
-        {
-            for (int j = 0; j < n; j++)
-            {
-                if (matrix[i][j] == 1e9)
-                {
-                    matrix[i][j] = -1;
-                }
+                if (graph[i][k] != INT_MAX && graph[k][j] != INT_MAX)
+                    graph[i][j] = min(graph[i][j], graph[i][k] + graph[k][j]);
             }
         }
     }
-};
-
+    for (int i = 0; i < n; i++)
+    {
+        if (graph[i][i] < 0)
+        {
+            cout << "neg cycle\n";
+            return;
+        }
+    }
+    cout << ((graph[x][y] == INT_MAX) ? -1 : graph[x][y]) << " ";
+    cout << endl;
+}
 int main()
 {
-
-    int V = 4;
-    vector<vector<int>> matrix(V, vector<int>(V, -1));
-    matrix[0][1] = 2;
-    matrix[1][0] = 1;
-    matrix[1][2] = 3;
-    matrix[3][0] = 3;
-    matrix[3][1] = 5;
-    matrix[3][2] = 4;
-
-    Solution obj;
-    obj.shortest_distance(matrix);
-
-    for (auto row : matrix)
+    cin >> n >> m;
+    for (int i = 0; i < n; i++)
+        graph[i][i] = 0;
+    while (m--)
     {
-        for (auto cell : row)
-        {
-            cout << cell << " ";
-        }
-        cout << endl;
+        int u, v, w;
+        cin >> u >> v >> w;
+        graph[u][v] = w;
     }
-
+    int x, y;
+    cin >> x >> y;
+    floyedWarshal(x, y);
     return 0;
 }

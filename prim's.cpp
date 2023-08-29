@@ -31,7 +31,7 @@ int main()
     int n, m;
 
     cin >> n >> m;
-    while (m--)
+    for (int i = 0; i < m; i++)
     {
         int u, v, w;
         cin >> u >> v >> w;
