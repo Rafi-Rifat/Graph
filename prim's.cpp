@@ -2,7 +2,7 @@
 using namespace std;
 const int N = 1e5 + 10;
 int sum = 0;
-vector<pair<int, int>> adj[N];
+vector<pair<int, int>> g[N];
 bool vis[N];
 void mst()
 {
@@ -19,10 +19,10 @@ void mst()
             continue;
         vis[node] = 1;
         sum += weight;
-        for (auto neighbour : adj[node])
+        for (auto child : g[node])
         {
-            if (!vis[neighbour.first])
-                pq.push({neighbour.second, neighbour.first});
+            if (!vis[child.first])
+                pq.push({child.second, child.first});
         }
     }
 }
@@ -35,8 +35,8 @@ int main()
     {
         int u, v, w;
         cin >> u >> v >> w;
-        adj[u].push_back({v, w});
-        adj[v].push_back({u, w});
+        g[u].push_back({v, w});
+        g[v].push_back({u, w});
     }
     mst();
     cout << sum << endl;
